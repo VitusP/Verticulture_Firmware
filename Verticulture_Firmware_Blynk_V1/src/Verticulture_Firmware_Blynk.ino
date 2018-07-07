@@ -2,7 +2,7 @@
  * Project TheVerticulture
  * Description: Smart IoT Vertical Garden built for everyone, everywhere.
  * Author: Vitus Putra
- * Date: 7//2018
+ * Date: 7/6/2018
  */
 PRODUCT_ID(7144);
 PRODUCT_VERSION(1);
@@ -18,7 +18,7 @@ PRODUCT_VERSION(1);
  char auth[] = "285a62612b4c45e3a1115e1546085365";
  BlynkTimer timer;
  //****************************************************TEMPERATUREandHUMIDITYandLIGHT**********************************************************************
- int TempPin = A0;   // what pin we're connected to
+ int TempPin = A0;   
  int pinLightSensor = A1;
  #define DHTTYPE DHT11		// DHT 11
  DHT dht(TempPin, DHTTYPE);
@@ -42,33 +42,32 @@ PRODUCT_VERSION(1);
 
 
  void setup() {
-//Particle.variable() Declaration
-     Particle.variable("Temperature", temperature);
-     Particle.variable("Humidity", humidity);
-     //Particle.variable("Light", lightSensor);
- //Blynk Initialization
-      Blynk.begin(auth);
-      timer.setInterval(1000L, sentSensorToBlynk);
- //Initialization
-     pinMode(pinPump, OUTPUT);
-     pinMode(pinLight, OUTPUT);
-     pinMode(7, OUTPUT);
+   //Particle.variable() Declaration
+   Particle.variable("Temperature", temperature);
+   Particle.variable("Humidity", humidity);
+   //Particle.variable("Light", lightSensor);
+   //Blynk Initialization
+   Blynk.begin(auth);
+   timer.setInterval(1000L, sentSensorToBlynk);
+   //Initialization
+   pinMode(pinPump, OUTPUT);
+   pinMode(pinLight, OUTPUT);
+   pinMode(7, OUTPUT);
 
-     dht.begin();
+   dht.begin();
 
-     if (! rtc.begin()) {
-         Serial.println("Couldn't find RTC");
-         //while (1);
-     }
+   if (! rtc.begin()) {
+        Serial.println("Couldn't find RTC");
+        //while (1);
+   }
 
- //pump initialization
-    intMillisPump = millis();
-    boolPumpOn = true;
-    pumpOnOff(boolPumpOn);
-//Sensor retreival
-    intMillisSensor = millis();
-    getSensorValues();
-
+   //pump initialization
+   intMillisPump = millis();
+   boolPumpOn = true;
+   pumpOnOff(boolPumpOn);
+   //Sensor retreival
+   intMillisSensor = millis();
+   getSensorValues();
 
  }
 
@@ -100,19 +99,18 @@ PRODUCT_VERSION(1);
     }else{
       pumpOnOff(false);
     }
-//light control
+    //light control
     if (intLightEnabled == 0){
       lightOnOff(true);
     }else{
       lightOnOff(false);
     }
 
-//Read sensor
+    //Read sensor
     unsigned long currentSensorMillis = millis();
     if((currentSensorMillis - intMillisSensor >= intSensorIntervals)){
       getSensorValues();
     }
-
  }
 
  void pumpOnOff(boolean pumpOn){
