@@ -41,7 +41,6 @@ void setup() {
 }
 
 void loop() {
-  // The core of your code will likely live here.
   get_DHT_Value();
 
 }
